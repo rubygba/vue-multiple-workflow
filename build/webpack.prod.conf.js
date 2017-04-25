@@ -46,6 +46,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.
         new OptimizeCSSPlugin(),
+
         // // generate dist index.html with correct asset hash for caching.
         // // you can customize output by editing /index.html
         // // see https://github.com/ampedandwired/html-webpack-plugin
@@ -65,6 +66,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         //     // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         //     chunksSortMode: 'dependency'
         // }),
+
         // split vendor js into its own file
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
@@ -96,6 +98,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     ]
 })
 
+// gzip
 if (config.build.productionGzip) {
     var CompressionWebpackPlugin = require('compression-webpack-plugin')
 
@@ -114,6 +117,7 @@ if (config.build.productionGzip) {
     )
 }
 
+// report
 if (config.build.bundleAnalyzerReport) {
     var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
     webpackConfig.plugins.push(new BundleAnalyzerPlugin())
@@ -126,7 +130,7 @@ for (var key in templates) {
     webpackConfig.plugins.push(new HtmlWebpackPlugin({
         filename: key + '.html',
         template: templates[key],
-        inject: false,
+        inject: true,
         minify: {
             removeComments: true,
             collapseWhitespace: true,

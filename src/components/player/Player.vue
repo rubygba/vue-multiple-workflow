@@ -1,17 +1,22 @@
 <template lang="html">
-    <div>Player HTML ENTRY</div>
+    <div>
+        <img src="../../assets/logo.png">
+        <p>Player HTML ENTRY</p>
+        <MyFooter></MyFooter>
+    </div>
 </template>
 
 <script>
-// import
+import MyFooter from '../common/Footer.vue'
 
 export default {
+    components: { MyFooter }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 body
-    background-color: #c00
+    background-color: #ff6
 
 div
     color: #c00

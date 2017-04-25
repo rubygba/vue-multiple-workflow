@@ -46,7 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-.DS_Store
 node_modules/
 dist/
 npm-debug.log
@@ -54,5 +53,10 @@ yarn-error.log
 test/unit/coverage
 test/e2e/reports
 selenium-debug.log
+
 yarn.lock
 .tern-project
+ErrorFiles
+.uini
+u.php
+up-rewrite.conf
