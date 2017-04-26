@@ -4,7 +4,7 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
 var entries = utils.getMultiFiles('./src/entries/', '.js')
-// console.log(entries);
+console.log(entries);
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)

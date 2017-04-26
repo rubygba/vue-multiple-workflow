@@ -3,7 +3,7 @@
         <router-view></router-view>
         <br>
         <p>多页面跳转 Multiple Entries：</p>
-        <a href="/index_player.html">another SPA</a>
+        <a href="./player.html">another SPA</a>
         <MyFooter></MyFooter>
     </div>
 </template>

@@ -17,6 +17,8 @@ export default {
 <style lang="stylus">
 body
     background-color: #ff6
+    width: 750px
+    margin: 0 auto
 
 div
     color: #c00

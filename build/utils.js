@@ -75,6 +75,7 @@ exports.styleLoaders = function(options) {
 exports.getMultiFiles = function(entryPath, extName) {
     var entries = {}
 
+    // TODO: 未做匹配，只要是文件都会读入，bug可能。扩展名不要变
     fs.readdirSync(entryPath).forEach((item) => {
         // entries[path.basename(item, '.js')] = path.join(entryPath, item)
         entries[path.basename(item, extName)] = entryPath + item

@@ -123,6 +123,8 @@ if (config.build.bundleAnalyzerReport) {
     webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
+// multiple entries
+// generate html with same name entries' js injected
 for (var key in templates) {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
@@ -138,6 +140,7 @@ for (var key in templates) {
             // more options:
             // https://github.com/kangax/html-minifier#options-quick-reference
         },
+        chunks: [key, 'vendor', 'manifest'], // !important
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency'
     }))

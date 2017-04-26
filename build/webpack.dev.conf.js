@@ -30,11 +30,15 @@ module.exports = merge(baseWebpackConfig, {
   ]
 })
 
+// var entries = utils.getMultiFiles('./src/entries/', '.js')
+// generate html with same name entries' js injected
 for (var key in templates) {
     // https://github.com/ampedandwired/html-webpack-plugin
+    console.log('html name: ' + key);
     module.exports.plugins.push(new HtmlWebpackPlugin({
         filename: key + '.html',
         template: templates[key],
-        inject: false
+        inject: true,
+        chunks: [key]
     }))
 }
