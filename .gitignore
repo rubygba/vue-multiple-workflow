@@ -47,7 +47,6 @@ Temporary Items
 .apdisk
 
 node_modules/
-dist/
 npm-debug.log
 yarn-error.log
 test/unit/coverage
@@ -60,3 +59,5 @@ ErrorFiles
 .uini
 u.php
 up-rewrite.conf
+.vscode
+*.zip

@@ -71,14 +71,61 @@ exports.styleLoaders = function(options) {
     return output
 }
 
-// 获取多入口文件
-exports.getMultiFiles = function(entryPath, extName) {
+exports.contains = function(arr, obj) {
+    console.log('test:', obj)
+    var i = arr.length
+    while (i--) {
+        console.log('arr:', arr[i])
+        if (arr[i] === obj) {
+            return true
+        }
+    }
+    return false
+}
+
+// 获取路径下文件名
+exports.getNamesInFolder = function(entryPath, extName) {
     var entries = {}
 
     // TODO: 未做匹配，只要是文件都会读入，bug可能。扩展名不要变
     fs.readdirSync(entryPath).forEach((item) => {
         // entries[path.basename(item, '.js')] = path.join(entryPath, item)
         entries[path.basename(item, extName)] = entryPath + item
+    })
+    return entries
+}
+
+// 根据modules目录下文件夹名生成
+exports.getModulesEntry = function(modulesDir) {
+    var dirs = {}
+
+    fs.readdirSync(modulesDir).forEach(item => {
+        if (fs.statSync(modulesDir + '/' + item).isDirectory()) {
+            dirs[item] = modulesDir + '/' + item
+        }
+    })
+    return dirs
+}
+
+exports.getEntries = function(modulesDir) {
+    var entries = {}
+
+    fs.readdirSync(modulesDir).forEach(item => {
+        if (fs.statSync(modulesDir + '/' + item).isDirectory()) {
+            var tempJs = modulesDir + '/' + item + '/' + item + '.js'
+            var tempHtml = modulesDir + '/' + item + '/' + item + '.html'
+            try {
+                fs.accessSync(tempJs)
+                fs.accessSync(tempHtml)
+            } catch (e) {
+                console.log(e)
+                tempJs = false
+            }
+            
+            if (tempJs) {
+                entries[item] = tempJs
+            }
+        }
     })
     return entries
 }

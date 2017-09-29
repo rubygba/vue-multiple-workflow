@@ -6,7 +6,9 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
-var templates = utils.getMultiFiles('./src/templates/', '.html')
+// var templates = utils.getNamesInFolder('./src/templates/', '.html')
+var modulesFolders = utils.getModulesEntry('./src/pages')
+console.log(modulesFolders);
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -30,15 +32,28 @@ module.exports = merge(baseWebpackConfig, {
   ]
 })
 
-// var entries = utils.getMultiFiles('./src/entries/', '.js')
+// var entries = utils.getNamesInFolder('./src/entries/', '.js')
 // generate html with same name entries' js injected
-for (var key in templates) {
+// for (var key in templates) {
+//     // https://github.com/ampedandwired/html-webpack-plugin
+//     console.log('html name: ' + key);
+//     module.exports.plugins.push(new HtmlWebpackPlugin({
+//         filename: key + '.html',
+//         template: templates[key],
+//         inject: true,
+//         favicon: config.dev.faviconPath,
+//         chunks: [key]
+//     }))
+// }
+
+for (var key in modulesFolders) {
     // https://github.com/ampedandwired/html-webpack-plugin
-    console.log('html name: ' + key);
+    console.log('folder name: ' + key);
     module.exports.plugins.push(new HtmlWebpackPlugin({
         filename: key + '.html',
-        template: templates[key],
+        template: modulesFolders[key] + '/' + key + '.html',
         inject: true,
+        favicon: config.dev.faviconPath,
         chunks: [key]
     }))
 }

@@ -1,0 +1,214 @@
+
+$lightBlue = #42beec
+
+body
+  background-color: #f7fbfc
+  padding-top: 50px
+  overflow-x: hidden
+  >a
+    display: none
+
+.content
+  margin-top: 20px
+
+.content-top-carousel
+  width: 520px
+.content-top-recommend
+  width: 360px
+.content-top-birth
+  width: 260px
+
+.content-mid0-board
+  width: 900px
+.content-mid0-rank
+  width: 260px
+
+.content-mid1-square
+  width: 900px
+.content-mid1-post
+  width: 260px
+
+.content-mid2-board
+  width: 900px
+.content-mid2-games
+  width: 260px
+
+
+li.item-modal
+  a
+    position: relative
+    display: block
+    color: #fff
+    img
+      display: block
+      width: 100%
+      height: 100%
+    p
+      position: absolute
+      width: 100%
+      font-size: 18px
+      line-height: 63px
+      height: 63px
+      padding: 0 15px
+      bottom: 0
+      overflow: hidden
+      background: rgba(0,0,0,.6)
+      background: -webkit-linear-gradient(transparent,rgba(0,0,0,.6))
+      span
+        // display: block
+        position: absolute
+        bottom: 3px
+
+.carousel
+  height: 220px
+  &:hover
+    box-shadow: 0 0 3px 1px $lightBlue
+  li.item-modal
+    p
+      text-overflow: ellipsis
+      white-space: nowrap
+  .carousel-indicators
+    bottom: 22px
+    .carousel-dot
+      text-indent: -999px // TODO:
+      overflow: hidden // TODO:
+      width: 8px
+      height: 8px
+      border-radius: 50%
+      background-color: #fff
+      margin: 4px
+      &.active
+        background-color: $lightBlue
+
+.carousel-index
+  .carousel
+    li.item-modal
+      img
+        width: 520px
+        height: 220px
+    .carousel-indicators
+      bottom: 35px
+      width: 20%
+      left: initial
+      right: -8px
+      .carousel-dot
+        width: 10px
+        height: 10px
+        margin: 5px
+  
+.recommend
+  li.item-modal
+    margin: 0 0 20px 20px
+    width: 160px
+    height: 100px
+    img
+      width: 160px
+      height: 100px
+    p
+      font-size: 10px
+      line-height: 18px
+      padding: 25px 5px 0 5px
+      overflow: hidden
+      transition: color .3s ease
+      // background: #000
+      // background: linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9))
+    &:hover
+      img
+        box-shadow: 0 0 3px 0px #42beec
+      p
+        color: #42beec
+
+
+.birth
+  li.item-modal
+    img
+      width: 260px
+      height: 220px
+    p
+      text-align: center
+      font-size: 18px
+      line-height: 1
+      padding: 20px 0 25px 0
+      text-overflow: ellipsis
+      white-space: nowrap
+
+.board
+  li
+    margin: 0 16px 6px 0
+    padding: 2px
+    width: 164px
+    height: 164px
+    overflow: hidden
+
+.rank
+  ul
+    height: 333px
+    overflow: hidden
+  li
+    height: 37px
+    font-size: 14px
+    .rank-number
+      display: inline-block
+      margin-right: 9px
+      font-size: 12px
+      background-color: #42beec
+      color: #fff
+      font-weight: 600
+      padding: 1px 5px
+      border-radius: 3px
+    a
+      span
+        transition: color .2s ease
+    a:hover
+      span
+        color: #42beec
+    .rank-img
+      width: 25px
+      height: 25px
+      vertical-align: middle
+      border-radius: 50%
+      margin-right: 5px
+    .rank-name
+      font-size: 14px
+
+.square-item
+  width: 430px
+  margin: 0 20px 20px 0
+
+.post
+  ul
+    height: 205px
+    overflow: hidden
+    li
+      margin-bottom: 10px
+      font-size: 12px
+      a
+        color: #444
+        transition: all .3s ease
+        &:hover
+          color: $lightBlue
+      // line-height: 16px
+
+
+    
+button.btn-blue
+  background-color: #42beec
+  color: #fff
+  border: 1px solid #42beec
+  outline: none
+  // &:hover
+  //   background-color: #fff
+  //   color: #42beec
+  &.active
+    background-color: #fff
+    color: #42beec
+    
+.btn-back-top
+  cursor: pointer
+  position: fixed
+  z-index: 99
+  width: 60px
+  height: 65px
+  right: 30px
+  bottom: 30px
+  background: url('~@/assets/back_top.png') no-repeat top center

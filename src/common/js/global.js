@@ -1,4 +1,4 @@
-/* global document:true */
+/* eslint-disable */
 /**
  * 扩展Array对象的方法(判断数组中是否包含指定值)
  * @param  {[type]} item 指定值
@@ -210,24 +210,28 @@ GLOBAL.Util = {
         if (!targetTime) {
             return false
         }
-        var currentTime = new Date().getTime()
-        var tdoa = Number(currentTime - targetTime),
-            dayTime = 24 * 60 * 60 * 1000, // 1天
-            hourTime = 60 * 60 * 1000, // 1小时
-            minuteTime = 60 * 1000 // 1分钟
+        var minuteTime = 60 * 1000, // 1分钟
+            hourTime = 60 * minuteTime, // 1小时
+            dayTime = 24 * hourTime, // 1天
+            currentTime = new Date().getTime(),
+            tdoa = Number(currentTime - targetTime),
+            yesterday = new Date(currentTime - dayTime).getDate(),
+            beforeYesterday = new Date(currentTime - 2*dayTime).getDate(),
+            targetDay = new Date(targetTime).getDate()
 
-        if (tdoa >= dayTime) { // 天
-            var h = tdoa / dayTime
-            if (h > 2) {
+        if (tdoa >= dayTime) { // 超过24小时的评论（距今秒数大于1天的秒数）
+            if (tdoa / dayTime > 3) { // 超过72小时显示精确日期
                 return this.timeToString(targetTime)
-            } else if (h > 1) {
+            } else if (targetDay === beforeYesterday) {
                 return '前天'
-            } else {
+            } else if (targetDay === yesterday) {
                 return '昨天'
+            } else { // 大前天显示精确日期
+                return this.timeToString(targetTime)
             }
-        } else if (tdoa >= hourTime) { // 小时
+        } else if (tdoa >= hourTime) { // 超过1小时的评论
             return Math.floor(tdoa / hourTime) + '小时前'
-        } else if (tdoa >= minuteTime) {
+        } else if (tdoa >= minuteTime) { // 超过1分钟的评论
             return Math.floor(tdoa / minuteTime) + '分钟前'
         } else {
             return '最新'
@@ -457,12 +461,12 @@ GLOBAL.Util = {
         var os_type = ''
         if (/android/i.test(navigator.userAgent)) {
             var index = agent.indexOf('android')
-            version = agent.substr(index + 8, 3)
+            var version = agent.substr(index + 8, 3)
             os_type = 'Android ' + version
         }
         if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
             var index = agent.indexOf('os')
-            version = agent.substr(index + 3, 3)
+            var version = agent.substr(index + 3, 3)
             os_type = 'iOS ' + version
         }
         if (/Linux/i.test(navigator.userAgent) && !/android/i.test(navigator.userAgent) && !/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
@@ -482,12 +486,13 @@ GLOBAL.Util = {
      * @return {json} {w: xxx, h: xxx}
      */
     getPixel: function() {
-        var width = window.screen.width
-        var height = window.screen.height
-        return {
-            w: width,
-            h: height
-        }
+        // var width = window.screen.width
+        // var height = window.screen.height
+        // return {
+        //     w: width,
+        //     h: height
+        // }
+        return window.screen.width + '*' + window.screen.height
     },
 
     /**
@@ -549,6 +554,20 @@ GLOBAL.Util = {
         }
         if (locaUrl.indexOf('#') >= 0) {
             endIndex = locaUrl.indexOf('#')
+            return locaUrl.substring(0, endIndex)
+        }
+        return locaUrl
+    },
+
+    /**
+     * 获取url（排除url中参数，保留路由）
+     * @return {[type]} [description]
+     */
+    getUrlNoQuery: function() {
+        var locaUrl = window.location.href,
+            endIndex = 0
+        if (locaUrl.indexOf('?') >= 0) {
+            endIndex = locaUrl.indexOf('?')
             return locaUrl.substring(0, endIndex)
         }
         return locaUrl

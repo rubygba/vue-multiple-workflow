@@ -44,7 +44,7 @@ module.exports = {
     //所有的switch语句都必须要有一个default分支
     "default-case": 2,
      //警告非4个空格缩进
-    "indent": [1, 4, { "SwitchCase": 1 }],
+    "indent": [0, 4, { "SwitchCase": 1 }],
     //该规则规定了在对象字面量语法中key和value之间的空白，冒号前不要留空格，冒号后面需留一个空格
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
      //警告混用tab制表符和空格

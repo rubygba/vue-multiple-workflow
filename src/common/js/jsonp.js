@@ -49,7 +49,6 @@ function fetchJsonp(_url, options = {}) {
     const timeout = options.timeout || defaultOptions.timeout
     const jsonpCallback = options.jsonpCallback || defaultOptions.jsonpCallback
     const params = options.params || defaultOptions.params
-
     let queryStr = formatParams(params)
 
     let timeoutId
@@ -59,18 +58,18 @@ function fetchJsonp(_url, options = {}) {
         const scriptId = `${jsonpCallback}_${callbackFunction}`
 
         window[callbackFunction] = (response) => {
-            resolve({
-                ok: true,
-                // keep consistent with fetch API
-                json: () => Promise.resolve(response),
-            })
+            // resolve({
+            //     ok: true,
+            //     // keep consistent with fetch API
+            //     json: () => Promise.resolve(response),
+            // })
+            resolve(response)
 
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
 
             removeScript(scriptId)
-
             clearFunction(callbackFunction)
         }
 

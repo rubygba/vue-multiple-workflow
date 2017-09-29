@@ -62,7 +62,7 @@ article, aside, blockquote, body, button, code, dd, details, div, dl, dt, fields
 }
 
 body, button, input, select, textarea {
-    font-family: "Hiragino Sans GB", "Helvetica Neue", Helvetica, STHeiTi, "Microsoft Yahei", sans-serif;
+    font-family: "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Helvetica, STHeiTi, "Microsoft Yahei", sans-serif;
     color: #666;
     background-color: #fff;
     position: relative
@@ -361,4 +361,12 @@ textarea::-webkit-input-placeholder {
 
 .line6 {
     -webkit-line-clamp: 6
+}
+
+.pictureholder {
+    background-color: rgba(150,150,150,.1);
+    /*background-image: url('//mini.eastday.com/toutiaoh5/img/img_preview.png');*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40%;
 }

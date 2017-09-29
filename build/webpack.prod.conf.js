@@ -9,7 +9,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-var templates = utils.getMultiFiles('./src/templates/', '.html')
+// var templates = utils.getNamesInFolder('./src/templates/', '.html')
+var modulesFolders = utils.getModulesEntry('./src/pages')
+console.log(modulesFolders);
 
 var env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
@@ -25,8 +27,12 @@ var webpackConfig = merge(baseWebpackConfig, {
     devtool: config.build.productionSourceMap ? '#source-map' : false,
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/[name].[chunkhash].js'),
-        chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+        filename: utils.contains(config.build.productionHashOnes, '[name]')
+            ? utils.assetsPath('js/[name].js')
+            : utils.assetsPath('js/[name].[chunkhash].js'),
+        chunkFilename: utils.contains(config.build.productionHashOnes, '[name]') 
+            ? utils.assetsPath('js/[id].js')
+            : utils.assetsPath('js/[id].[chunkhash].js'),
     },
     plugins: [
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -35,13 +41,17 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
-                warnings: false
+                warnings: false,
+                drop_debugger: true,
+                drop_console: true
             },
             sourceMap: true
         }),
         // extract css into its own file
         new ExtractTextPlugin({
-            filename: utils.assetsPath('css/[name].[contenthash].css')
+            filename: utils.contains(config.build.productionHashOnes, '[name]') 
+                ? utils.assetsPath('css/[name].css')
+                : utils.assetsPath('css/[name].[chunkhash].css') 
         }),
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.
@@ -125,17 +135,35 @@ if (config.build.bundleAnalyzerReport) {
 
 // multiple entries
 // generate html with same name entries' js injected
-for (var key in templates) {
+// for (var key in templates) {
+//     webpackConfig.plugins.push(new HtmlWebpackPlugin({
+//         filename: key + '.html',
+//         template: templates[key],
+//         inject: true,
+//         favicon: config.build.faviconPath,
+//         minify: {
+//             removeComments: true,
+//             // collapseWhitespace: true,
+//             removeAttributeQuotes: true
+//         },
+//         chunks: [key, 'vendor', 'manifest'], // !important
+//         chunksSortMode: 'dependency'
+//     }))
+// }
+
+
+for (var key in modulesFolders) {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     webpackConfig.plugins.push(new HtmlWebpackPlugin({
         filename: key + '.html',
-        template: templates[key],
+        template: modulesFolders[key] + '/' + key + '.html',
         inject: true,
+        favicon: config.build.faviconPath,
         minify: {
             removeComments: true,
-            collapseWhitespace: true,
+            // collapseWhitespace: true,
             removeAttributeQuotes: true
             // more options:
             // https://github.com/kangax/html-minifier#options-quick-reference

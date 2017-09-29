@@ -3,8 +3,8 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
-var entries = utils.getMultiFiles('./src/entries/', '.js')
-console.log(entries);
+var entries = utils.getEntries('./src/pages')
+// console.log(entries);
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -27,9 +27,9 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src'),
-            // 'src': path.resolve(__dirname, '../src'),
-            // 'assets': path.resolve(__dirname, '../src/assets'),
-            // 'components': path.resolve(__dirname, '../src/components')
+            'src': path.resolve(__dirname, '../src'),
+            'assets': path.resolve(__dirname, '../src/assets'),
+            'components': path.resolve(__dirname, '../src/components')
         }
     },
     module: {

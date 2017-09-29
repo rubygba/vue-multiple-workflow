@@ -6,8 +6,9 @@ module.exports = {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
     assetsPublicPath: './',
+    assetsSubDirectory: 'static',
+    faviconPath: '',
     productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
@@ -15,6 +16,7 @@ module.exports = {
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],
+    productionHashOnes: ['index'],
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
@@ -23,11 +25,23 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8080,
+    port: 8088,
     autoOpenBrowser: true,
-    assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    assetsSubDirectory: 'static',
+    // faviconPath: path.resolve(__dirname, '../src/assets/favicon.ico'),
+    faviconPath: '',
+    proxyTable: {
+      // '/api': {
+      //   // target: 'http://123.58.136.98:8088/api',
+      //   target: 'http://2333.moemoe.la/api',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // }
+    },
+    
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
