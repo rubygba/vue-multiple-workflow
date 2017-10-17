@@ -6,7 +6,7 @@ import cookies from 'js-cookie'
 // import cache from 'web-storage-cache'
 // import VueTouchRipple from 'vue-touch-ripple'
 
-import App from './components/App.vue'
+import App from './vue/App.vue'
 import * as filters from '@/common/js/filters.js'
 import router from './router.js'
 // import store from './vuex'

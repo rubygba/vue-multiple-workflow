@@ -29,7 +29,8 @@ module.exports = {
             '@': resolve('src'),
             'src': path.resolve(__dirname, '../src'),
             'assets': path.resolve(__dirname, '../src/assets'),
-            'components': path.resolve(__dirname, '../src/components')
+            'components': path.resolve(__dirname, '../src/common/vue'),
+            'common': path.resolve(__dirname, '../src/common')
         }
     },
     module: {
@@ -58,7 +59,7 @@ module.exports = {
                 loader: 'url-loader',
                 query: {
                     limit: 10000,
-                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                    name: utils.assetsPath('images/[name].[hash:7].[ext]')
                 }
             },
             {
